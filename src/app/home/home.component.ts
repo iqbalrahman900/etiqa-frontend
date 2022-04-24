@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   isEditMode = false;
   itemSelected: any;
 
+
   public editProfileForm = new FormGroup({
     username: new FormControl(''),
     email: new FormControl(''),
@@ -61,7 +62,7 @@ export class HomeComponent implements OnInit {
     });
     console.log("user", user);
 
-
+    this.itemSelected = user._id;
     console.log("patchvalue", this.editProfileForm);
 
     this.editProfileForm.patchValue({
@@ -86,8 +87,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onSubmitEdit() {
-
+  async onSubmitEdit() {
+    const data = this.editProfileForm.getRawValue();
+    const id = this.itemSelected;
+    const update = await this.api.updateUser(data, id).toPromise();
+    this.api.getUser().subscribe(res => {
+      this.users = res;
+      console.log('data response', this.users);
+    });
+    
+    
     this.toastr.success('Successfully Edit');
     this.modalService.dismissAll();
 
