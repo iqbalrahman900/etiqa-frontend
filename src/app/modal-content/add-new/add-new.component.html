@@ -1,0 +1,87 @@
+<div class="container row ml-0 pr-0">
+    <div class="col-md-9">
+        <div class="text-center mt-20">
+            <img src="https://etiqa.com.my/infosite/assets/img/etiqa.png" alt="etiqa logo">
+        </div>
+        <form [formGroup]="SignupForm" (ngSubmit)="onSubmitForm()">
+            <p class="txt-head"><span class="txt-yellow">Create</span> New Account</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="first">Username</label>
+                        <input type="text" class="form-control" placeholder="Insert your username" id="username"
+                            formControlName="username">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="last">Email Address</label>
+                        <input type="email" class="form-control" placeholder="Insert your email address" id="email"
+                            formControlName="email">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="company">Phone Number</label>
+                        <input type="number" class="form-control" placeholder="Insert your Phone Number" id="phone"
+                            formControlName="phone">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div formArrayName="hobby">
+                        <button class="btn btn-hobby btn-default" type="button" (click)="onAddHobby()">Add
+                            Hobby</button>
+                        <div class="form-group row" *ngFor="let hobbyControl of func_hobby(); let i=index">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="hobby" [formControlName]="i">
+                            </div>
+                            <div class="col-md-2">
+                           
+                            <img (click)="deleteHobby(i)" src="../../assets/actions-trash.png" class="img-icon trash" data-toggle="tooltip" data-placement="bottom" title="Delete hobby">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div formArrayName="skill">
+                        <button class="btn btn-hobby btn-default" type="button" (click)="onAddSKill()">Add
+                            Skill</button>
+                    
+                        <div class="form-group row" *ngFor="let hobbyControl of func_skill(); let i=index">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="skill" [formControlName]="i">
+                            </div>
+                            <div class="col-md-2">
+                           
+                            <img (click)="deleteSkill(i)" src="../../assets/actions-trash.png" class="img-icon trash" data-toggle="tooltip" data-placement="bottom" title="Delete hobby">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-20">
+
+                <div class="col-md-6">
+
+                    <button type="submit" class="btn btn-submit w-100">Create Account</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-cancel w-100" (click)="closeModal()">Cancel</button>
+
+                </div>
+            </div>
+
+        </form>
+
+
+        <!-- {{this.SignupForm.value | json}} -->
+    </div>
+    <div class="col-md-3 bg-img p-0">
+        <img class="center" src="https://etiqa.com.my/infosite/assets/img/etiqa.png">
+    </div>
+</div>
